@@ -2,10 +2,13 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from customtkinter import *
 from PIL import Image, ImageTk
+
+#images for widgets declaration
 cbimg = CTkImage(Image.open("assets/cbalance.png"),size=(30,30))
 tfimg = CTkImage(Image.open("assets/tfunds.png"),size=(30,30))
 hpng = CTkImage(Image.open("assets/hist.png"),size=(30,30))
 userimg = CTkImage(Image.open("assets/user.png"),size=(30,30))
+lgimg = CTkImage(Image.open("assets/login.png"),size=(15,15))
 
 class BankingAppGUI:
     def __init__(self, root):
@@ -36,8 +39,9 @@ class BankingAppGUI:
 
         self.password_entry = tk.Entry(self.login_window, font=("Arial", 14), show="*")  # Masking password
         self.password_entry.grid(row=1, column=1, padx=10, pady=5)
+    
 
-        login_btn = ttk.Button(self.login_window, text="Login", command=self.login)
+        login_btn = CTkButton(master=self.login_window, text="Login", command=self.login, border_color="#90f0d4", fg_color="blue", image=lgimg)
         login_btn.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
 
         # Hide main window until successful login
