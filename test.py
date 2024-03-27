@@ -1,18 +1,24 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-
+from customtkinter import *
+from PIL import Image, ImageTk
 class BankingAppGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Banking App")
         self.users_file = "users.txt"  # File to store user data
         self.transactions_file = "transactions.txt"  # File to store transactions
-
+        self.root.geometry("500x500")
         # Set background color
         self.root.configure(bg="#485f89")
+        #Widget Images
+        cbimg = CTkImage(Image.open("assets/cbalance.png"),size=(30,30))
+        tfimg = CTkImage(Image.open("assets/tfunds.png"),size=(30,30))
+        hpng = CTkImage(Image.open("assets/hist.png"),size=(30,30))
+        userimg = CTkImage(Image.open("assets/user.png"),size=(30,30))
 
         # Create main window widgets
-        self.label = tk.Label(root, text="Welcome to Banking App", font=("Arial", 24), bg="#f0f0f0", fg="#333")
+        self.label = tk.Label(root, text="Manage Your Funds", font=("Arial", 24), bg="#919fb8", fg="#333")
         self.label.pack(pady=20)
 
         self.buttons_frame = tk.Frame(root, bg="#6d7fa1")
@@ -23,17 +29,17 @@ class BankingAppGUI:
         style.configure('TButton', font=('Arial', 14), background='#919fb8', foreground='black')
         style.map('TButton', background=[('active', '#919fb8')])
 
-        self.balance_btn = ttk.Button(self.buttons_frame, text="Check Balance", command=self.open_balance_window)
-        self.balance_btn.grid(row=0, column=0, padx=10, pady=10)
+        self.balance_btn = CTkButton(master=self.buttons_frame, text="Check Balance", command=self.open_balance_window, border_color="#90f0d4", fg_color="blue", image=cbimg)
+        self.balance_btn.grid(row=0, column=0, padx=10, pady=20)
 
-        self.transfer_btn = ttk.Button(self.buttons_frame, text="Transfer Funds", command=self.open_transfer_window)
-        self.transfer_btn.grid(row=0, column=1, padx=10, pady=10)
+        self.transfer_btn = CTkButton(master=self.buttons_frame, text="Transfer Funds", command=self.open_transfer_window, border_color="#90f0d4", fg_color="blue", image=tfimg)
+        self.transfer_btn.grid(row=0, column=1, padx=10, pady=20)
 
-        self.transaction_history_btn = ttk.Button(self.buttons_frame, text="Transaction History", command=self.open_transaction_history_window)
-        self.transaction_history_btn.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
+        self.transaction_history_btn = CTkButton(master = self.buttons_frame, text="Transaction History", command=self.open_transaction_history_window, border_color="#90f0d4", fg_color="blue", image=hpng)
+        self.transaction_history_btn.grid(row=1, column=0, columnspan=2, padx=10, pady=20)
 
-        self.create_user_btn = ttk.Button(self.buttons_frame, text="Create User", command=self.open_create_user_window)
-        self.create_user_btn.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+        self.create_user_btn = CTkButton(master = self.buttons_frame, text="Create User", command=self.open_create_user_window, border_color="#90f0d4", fg_color="blue",image = userimg)
+        self.create_user_btn.grid(row=2, column=0, columnspan=2, padx=10, pady=20)
 
     def open_balance_window(self):
         balance_window = tk.Toplevel(self.root)
