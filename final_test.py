@@ -137,9 +137,13 @@ class BankingAppGUI:
 
         amount_label = tk.Label(transfer_window, text="Amount:", bg="#485f89", font=("Arial", 14), fg="#333")
         amount_label.grid(row=1, column=0, padx=10, pady=5)
-
-        self.amount_entry = tk.Entry(transfer_window, font=("Arial", 14))
+        def slider_event(value):
+            print(value)
+       # self.amount_entry = tk.Entry(transfer_window, font=("Arial", 14))
+        self.amount_entry = CTkSlider(master = transfer_window, from_ = 0, to=1000, number_of_steps= 5,
+                                      button_color="blue", progress_color="blue", orientation="horizontal", command = slider_event     )
         self.amount_entry.grid(row=1, column=1, padx=10, pady=5)
+       
 
         recipient_label = tk.Label(transfer_window, text="Recipient:", bg="#485f89", font=("Arial", 14), fg="#333")
         recipient_label.grid(row=2, column=0, padx=10, pady=5)

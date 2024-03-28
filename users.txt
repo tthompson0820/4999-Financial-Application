@@ -1,5 +1,5 @@
-1,Alice,pass123,1000.00
-2,Bob,pass456,2000.00
+1,Alice,pass123,800.0
+2,Bob,pass456,2200.0
 3,Charlie,pass789,10500.0
 4,Kelly,pass567,3764753746.0
 5,Johnny,pass123,10
