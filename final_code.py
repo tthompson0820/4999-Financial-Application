@@ -21,47 +21,54 @@ class BankingAppGUI:
         self.root.configure(bg="#485f89")
 
         # Create login window
+     
         self.login_window = tk.Toplevel(self.root)
         self.login_window.title("Login")
-
+        self.login_window.geometry("500x500")
         # Set background color
         self.login_window.configure(bg="#485f89")
-
+        #Login Label
+        self.loginlabel = CTkLabel(master = self.login_window,
+                                    text="Please Sign In ")
+        self.loginlabel.pack(pady= 12, padx=10)
         # Create widgets for login window
-        username_label = tk.Label(self.login_window, text="Username:", bg="#485f89", font=("Arial", 14), fg="#333")
-        username_label.grid(row=0, column=0, padx=10, pady=5)
+        self.username_entry= CTkEntry(master=self.login_window, 
+                         placeholder_text="Username") 
+        self.username_entry.pack(pady=12,padx=10) 
 
-        self.username_entry = tk.Entry(self.login_window, font=("Arial", 14))
-        self.username_entry.grid(row=0, column=1, padx=10, pady=5)
+        #self.username_entry = tk.Entry(self.login_window, font=("Arial", 14))
+        #self.username_entry.grid(row=0, column=1, padx=10, pady=5)
 
-        password_label = tk.Label(self.login_window, text="Password:", bg="#485f89", font=("Arial", 14), fg="#333")
-        password_label.grid(row=1, column=0, padx=10, pady=5)
+        self.password_entry= CTkEntry(master=self.login_window, 
+                        placeholder_text="Password", 
+                        show="*") 
+        self.password_entry.pack(pady=12,padx=10) 
 
-        self.password_entry = tk.Entry(self.login_window, font=("Arial", 14), show="*")  # Masking password
-        self.password_entry.grid(row=1, column=1, padx=10, pady=5)
+        #self.password_entry = tk.Entry(self.login_window, font=("Arial", 14), show="*")  # Masking password
+        #self.password_entry.grid(row=1, column=1, padx=10, pady=5)
     
 
         login_btn = CTkButton(master=self.login_window, text="Login", command=self.login, border_color="#90f0d4", fg_color="blue", image=lgimg)
-        login_btn.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
+        login_btn.pack( padx=10, pady=12)
 
         # Hide main window until successful login
         self.root.withdraw()
 
     def login(self):
-        username = self.username_entry.get()
-        password = self.password_entry.get()
+        self.username = self.username_entry.get()
+        self.password = self.password_entry.get()
 
         # Check credentials against users.txt file
         found = False
         with open(self.users_file, 'r') as file:
             for line in file:
                 data = line.strip().split(',')
-                if data[1] == username and data[2] == password:
+                if data[1] == self.username and data[2] == self.password:
                     found = True
                     break
 
         if found:
-            messagebox.showinfo("Login Successful", "Welcome!")
+            messagebox.showinfo("Login Successful", "Authenticated")
             # If login successful, show the main window
             self.root.deiconify()
             # Destroy login window
@@ -73,9 +80,10 @@ class BankingAppGUI:
 
     def initialize_main_window(self):
         # Create main window widgets
-        self.label = tk.Label(self.root, text="Manage Your Funds", font=("Arial", 24), bg="#919fb8", fg="#333")
+        self.label = tk.Label(self.root, text="Welcome, "+ self.username +"!",font=("Arial", 19), bg="#919fb8", fg="#333" )
         self.label.pack(pady=20)
-
+        self.label1 = tk.Label(self.root, text="Manage Your Funds", font=("helvecta", 24), bg="#919fb8", fg="#333")
+        self.label1.pack(pady=20)
         self.buttons_frame = tk.Frame(self.root, bg="#6d7fa1")
         self.buttons_frame.pack(pady=10)
 
@@ -173,10 +181,10 @@ class BankingAppGUI:
 
         self.initial_balance_entry = tk.Entry(create_user_window, font=("Arial", 14))
         self.initial_balance_entry.grid(row=3, column=1, padx=10, pady=5)
-        
+
         create_btn = tk.Button(create_user_window, text="Create User", command=self.create_user)
         create_btn.grid(row=4, column=0, columnspan=2, padx=10, pady=5)
-        
+
 
     def open_transaction_history_window(self):
         transaction_history_window = tk.Toplevel(self.root)
