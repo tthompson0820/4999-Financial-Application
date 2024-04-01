@@ -1,3 +1,6 @@
+#authors: Ethan Sledzinksi & Thomas Thompson
+#4999 Senior Capstone Project
+
 import tkinter as tk
 from tkinter import ttk, messagebox
 from customtkinter import *
